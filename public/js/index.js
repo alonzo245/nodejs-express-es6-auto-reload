@@ -46,12 +46,3 @@ const sendRequest = () => {
 }
 
 window.addEventListener('click', traceClicks)
-
-// fake api call
-// fetch('http://example.con/')
-// .then(response => {
-//   return response.json();
-// })
-// .then(function(myJson) {
-//   console.log(JSON.stringify(myJson));
-// });
