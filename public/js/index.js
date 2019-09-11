@@ -1,15 +1,3 @@
-/**
- * 1. trace all mouse clicks in page
- * 2. send myData every 2 secondes insted of each time user clicked element ['{}', '{}']
- * 3. every click should be send as follow:
- *      {
- *          "timeClicked": 12321432454,
- *           "pageUrl": "localhost:3334/****", 
- *          "elemntsTree": html/body/main/div#container/button#clickMe
- *      }
- */
-
-
 const myData = '{}';
 let events = []
 let timerId = false;
