@@ -37,7 +37,7 @@ const traceClicks = (e) => {
 
 const sendRequest = () => {
     let arrToSend = events.map(item => {
-        return item
+        // return item
         return JSON.stringify(item)
     })
     events = []
