@@ -9,30 +9,18 @@
  *      }
  */
 
-const debounced = (delay, fn, events) => {
-    let timerId;
-    return (...args) => {
-        // if (timerId) {
-        //     clearTimeout(timerId);
-        // }
-        // timerId = setTimeout(() => {
-        setTimeout(() => {
-            fn(...args);
-            timerId = null;
-            sendRequest(events);
-        }, delay);
-    }
-}
 
-const traceClicks = e => {
-    // console.log(e)
+const myData = '{}';
+let events = []
+let timerId = false;
+
+const traceClicks = (e) => {
     let nodes = e.path.map(node => {
         if (node != 'undefined') {
             let id = node.id ? `#${node.id}` : '';
             return `${node.nodeName}${id}`;
         }
     });
-    // console.log(nodes.reverse().join('/'))
 
     let data = {
         time: new Date().getTime(),
@@ -40,21 +28,24 @@ const traceClicks = e => {
         elementTree: nodes.reverse().join('/')
     }
     events.push(data)
-    // console.log(events.length)
+    if (timerId) return
+    timerId = setTimeout(() => {
+        sendRequest(events)
+        timerId = false
+    }, 2000);
 }
 
-const sendRequest = events => {
+const sendRequest = () => {
     let arrToSend = events.map(item => {
         return item
-        // return JSON.stringify(item)
+        return JSON.stringify(item)
     })
+    events = []
     console.log('sending data...')
     console.log(arrToSend)
 }
 
-const myData = '{}';
-const events = []
-window.addEventListener('click', debounced(2000, traceClicks, events))
+window.addEventListener('click', traceClicks)
 
 // fake api call
 // fetch('http://example.con/')
